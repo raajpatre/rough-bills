@@ -3,8 +3,8 @@ const {
   calculateDirectSettlements,
   calculateMinimumCashFlow
 } = require("../utils/calculateMinimumCashFlow");
-const { buildArchivedDebtSummary } = require("../../../src/utils/buildArchivedDebtSummary");
-const { reconcileSettlementPayments } = require("../../../src/utils/reconcileSettlementPayments");
+const { buildArchivedDebtSummary } = require("../lib/calculations/buildArchivedDebtSummary");
+const { reconcileSettlementPayments } = require("../lib/calculations/reconcileSettlementPayments");
 const { generateRoomCode } = require("../utils/roomCode");
 const { createHttpError } = require("../utils/httpError");
 

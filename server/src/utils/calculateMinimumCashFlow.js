@@ -1,1 +1,1 @@
-module.exports = require("../../../src/utils/calculateMinimumCashFlow");
+module.exports = require("../lib/calculations/calculateMinimumCashFlow");

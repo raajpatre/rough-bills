@@ -21,6 +21,18 @@ function assertValidUsername(username) {
   }
 }
 
+function assertValidPassword(password) {
+  if (!password || typeof password !== "string") {
+    throw createHttpError(400, "Password is required.");
+  }
+  if (password.length < 8) {
+    throw createHttpError(400, "Password must be at least 8 characters long.");
+  }
+  if (password.length > 128) {
+    throw createHttpError(400, "Password is too long (max 128 characters).");
+  }
+}
+
 router.post("/register", async (req, res, next) => {
   try {
     const username = normalizeUsername(req.body.username);
@@ -31,6 +43,7 @@ router.post("/register", async (req, res, next) => {
     }
 
     assertValidUsername(username);
+    assertValidPassword(password);
 
     const existingUser = await prisma.user.findUnique({
       where: { username }

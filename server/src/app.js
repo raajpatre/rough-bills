@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const rateLimit = require("express-rate-limit");
 
 const { env } = require("./config/env");
 const { authRoutes } = require("./routes/authRoutes");
@@ -25,7 +26,15 @@ app.get("/api/health", (_req, res) => {
   res.json({ ok: true });
 });
 
-app.use("/api/auth", authRoutes);
+const authLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 10,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { message: "Too many auth attempts. Try again in a few minutes." }
+});
+
+app.use("/api/auth", authLimiter, authRoutes);
 app.use("/api/hangouts", hangoutRoutes);
 
 app.use((req, res) => {

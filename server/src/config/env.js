@@ -33,8 +33,16 @@ function isAllowedDevOrigin(origin) {
   }
 }
 
-if (nodeEnv !== "development" && !jwtSecret) {
-  throw new Error("JWT_SECRET must be set outside development.");
+if (nodeEnv !== "development") {
+  if (!jwtSecret) {
+    throw new Error("JWT_SECRET must be set in production.");
+  }
+  if (jwtSecret === "development-secret") {
+    throw new Error("JWT_SECRET must not be the development default in production.");
+  }
+  if (jwtSecret.length < 32) {
+    throw new Error("JWT_SECRET must be at least 32 characters in production. Generate with: openssl rand -hex 32");
+  }
 }
 
 const env = {

@@ -14,7 +14,7 @@
     "prisma:deploy": "npm run prisma:deploy --workspace server",
     "prisma:generate": "npm run prisma:generate --workspace server",
     "start:server": "npm run start --workspace server",
-    "test": "node --test src/**/*.test.js"
+    "test": "node --test server/src/lib/calculations/*.test.js"
   },
   "devDependencies": {
     "prisma": "^6.19.3"
