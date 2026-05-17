@@ -1,4 +1,4 @@
-# MyFinance
+# Rough Bills
 
 Mobile-first student group expense tracking with hangout-based splits, optimized settlements, and repayment tracking after a hangout ends.
 
